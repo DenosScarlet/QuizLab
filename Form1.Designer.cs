@@ -31,6 +31,7 @@
             this.PB = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PB)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,12 +69,31 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.Transparent;
             this.button1.Image = global::QuizLab.Properties.Resources._1648003785_32_kartinkin_net_p_krestik_kartinki_35;
-            this.button1.Location = new System.Drawing.Point(775, 5);
+            this.button1.Location = new System.Drawing.Point(774, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(30, 30);
             this.button1.TabIndex = 2;
+            this.button1.TabStop = false;
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.BackgroundImage = global::QuizLab.Properties.Resources.png_transparent_window_computer_icons_user_window_furniture_rectangle_window;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.ForeColor = System.Drawing.Color.Transparent;
+            this.button2.Image = global::QuizLab.Properties.Resources.png_transparent_window_computer_icons_user_window_furniture_rectangle_window;
+            this.button2.Location = new System.Drawing.Point(743, 8);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(25, 25);
+            this.button2.TabIndex = 3;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // MainForm
             // 
@@ -82,7 +102,9 @@
             this.BackColor = System.Drawing.SystemColors.Window;
             this.BackgroundImage = global::QuizLab.Properties.Resources._1617592839_1_p_dota_fon_1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(816, 489);
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ControlBox = false;
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.PB);
@@ -107,5 +129,6 @@
         private PictureBox PB;
         private Label label1;
         private Button button1;
+        private Button button2;
     }
 }

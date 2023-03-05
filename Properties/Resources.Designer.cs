@@ -79,5 +79,15 @@ namespace QuizLab.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap png_transparent_window_computer_icons_user_window_furniture_rectangle_window {
+            get {
+                object obj = ResourceManager.GetObject("png_transparent_window_computer_icons_user_window_furniture_rectangle_window", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
