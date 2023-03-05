@@ -4,6 +4,7 @@ namespace QuizLab
     {
         QuizClass quiz = new QuizClass();
         bool IsStarted = false;
+        int count = 0;
         public MainForm()
         {
             InitializeComponent();
@@ -20,6 +21,19 @@ namespace QuizLab
             Button bt = (Button)sender;
 
             quiz.AnswerChecker(bt, PB);
+            count++;
+            if (count == 10) 
+            {
+                //IsStarted = true;
+                quiz.StartStop();
+                PB.Visible = false;
+                //quiz.PictureLoad(PB);
+                quiz.buttons(this, QuizButton_Click);
+                quiz._TutorialButton(this, TutorialButton_Click);
+                IsStarted = false;
+                count = 0;
+
+            }
 
         }
 
@@ -56,18 +70,26 @@ namespace QuizLab
             {
                 IsStarted = true;
                 PB.Visible = true;
-                quiz.Tutorial(this);
                 quiz.PictureLoad(PB);
+                quiz.Tutorial(this, TutButt_Click);
+
             }
             else
             {
                 IsStarted = false;
                 PB.Visible = false;
+                quiz.Tutorial(this, TutButt_Click);
 
             }
-            
-
-
+        }
+        private void TutButt_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                quiz.PictureLoad(PB);
+                quiz.EsheOdinEbuciyMetodSuka();
+            }
+            catch { MessageBox.Show("Ну ты кадр"); this.Close(); }
         }
 
         private void MainForm_MouseDown(object sender, MouseEventArgs e)

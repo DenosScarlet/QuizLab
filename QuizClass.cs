@@ -11,16 +11,17 @@ namespace QuizLab
     {
         // Переменные
         Label cntr = new Label();
-        bool IsStarted = false;
+        bool _IsStarted = false;
         bool PicturesAreLoaded = false;
         int i = new int();
-        int Chances = 5;
+        int Chances = 10;
         int CounterOfCorrectAnswers = 0;
         string CorrectAnswer = "";
         List<int> NumOfBts = new List<int>() { 0, 1, 2 };
         Button[] butts = new Button[3];
         Button TutorialButton= new Button();
         Button StartStopButton = new Button();
+        Button TutButt = new Button();
         static Random rnd = new Random();
         static Random rnd_bt = new Random();
 
@@ -29,8 +30,8 @@ namespace QuizLab
 
     public void PictureLoad(PictureBox pb) // Рандомная вставка картинок
         {
-            if (IsStarted == true)
-            {
+           // if (_IsStarted == true)
+            //{
                 if (PicturesAreLoaded == false)
                 {
                     foreach (var photoName in kekw)
@@ -43,14 +44,14 @@ namespace QuizLab
                 i = rnd.Next(0, PhotoNames.Count);
                 pb.Image = Image.FromFile("..\\..\\..\\Photos\\" + PhotoNames[i]);
                 CorrectAnswer = PhotoNames[i].Substring(0, PhotoNames[i].Length - 4);
-            }
+            //}
         }
         public void buttons(System.Windows.Forms.Control parentControl, System.EventHandler QuizButton_Click) // Метод чтобы делать кнопки блин вот так
         {
-            if (IsStarted == true)
+            if (_IsStarted == true)
             {
                 NumOfBts = new List<int>() { 0, 1, 2 };
-                Chances = 5;
+                Chances = 10;
                 CounterOfCorrectAnswers = 0;
                 for (int j = 0; j <= 2; j++)
                 {
@@ -137,13 +138,28 @@ namespace QuizLab
             }
             else 
             { 
-                if (CounterOfCorrectAnswers >= 5)
+                if (CounterOfCorrectAnswers >= 10)
                 {
-                    MessageBox.Show("Вау! Да ты, видимо, про-игрок!\nНабрано 5 баллов из 5, поздравляю!");
+                    MessageBox.Show("Вау! Да ты, видимо, про-игрок!\nНабрано 10 баллов из 10, поздравляю!");
+                    
                 }
-                else
+                else if (CounterOfCorrectAnswers >= 8)
                 {
-                    MessageBox.Show("Ты допустил ошибку.");
+                    MessageBox.Show("Очень хорошо! Наверняка твой ранг не ниже титана!\n" +
+                        "Ты ответил правильно на " + CounterOfCorrectAnswers + " из 10.");
+                    
+                }
+                else if (CounterOfCorrectAnswers >= 5)
+                {
+                    MessageBox.Show("Вполне неплохо!\n" +
+                        "Ты ответил правильно на " + CounterOfCorrectAnswers + " из 10.");
+                    
+                }
+                else if (CounterOfCorrectAnswers < 5)
+                {
+                    MessageBox.Show("Бро, надо тренироваться.\n" +
+                        "Ты ответил правильно на " + CounterOfCorrectAnswers + " из 10.");
+                    
                 }
             }
         }
@@ -163,13 +179,53 @@ namespace QuizLab
             parentControl.Controls.Add(TutorialButton);
         }
 
-        public void Tutorial(System.Windows.Forms.Control parentControl)
+        public void Tutorial(System.Windows.Forms.Control parentControl, System.EventHandler TutButt_Click)
         {
-            IsStarted = true;
+            if (_IsStarted == false)
+            {
+                TutButt = new System.Windows.Forms.Button();
+                _IsStarted = true;
+                TutorialButton.Location = new System.Drawing.Point(530, 60);
+                TutorialButton.Size = new System.Drawing.Size(70, 50);
+                TutorialButton.Text = "Закончить обучение";
+                StartStopButton.Visible = false;
+
+                TutButt = new System.Windows.Forms.Button();
+                TutButt.Location = new System.Drawing.Point(337, 142 + 75);
+                TutButt.BackColor = Color.White;
+                TutButt.Size = new System.Drawing.Size(233, 53);
+                TutButt.Click += new System.EventHandler(TutButt_Click);
+                TutButt.Anchor = AnchorStyles.Top;
+                TutButt.Font = new Font("Gilroy Light", 16);
+                TutButt.Padding = new Padding(10);
+                TutButt.AutoSize = true;
+                TutButt.TabStop = false;
+                TutButt.Text = PhotoNames[i].Substring(0, PhotoNames[i].Length - 4);
+                parentControl.Controls.Add(TutButt);
+            }
+            else
+            {
+                _IsStarted = false;
+                TutorialButton.Location = new System.Drawing.Point(420, 200);
+                TutorialButton.Size = new System.Drawing.Size(270, 100);
+                TutorialButton.Text = "Пройти обучение";
+                StartStopButton.Visible = true;
+                TutButt.Dispose();
+
+            }
+        }
+        public void EsheOdinEbuciyMetodSuka()
+        {
+            TutButt.Text = PhotoNames[i].Substring(0, PhotoNames[i].Length - 4);
+            PhotoNames.RemoveAt(i);
+            if (PhotoNames[0] == null)
+            {
+                MessageBox.Show("Лее куда прешь");
+            }
         }
         public void _StartStopButton(System.Windows.Forms.Control parentControl, System.EventHandler StartStopButton_Click)
         {
-            if (IsStarted == false)
+            if (_IsStarted == false)
             {
                 StartStopButton = new System.Windows.Forms.Button();
                 StartStopButton.Location = new System.Drawing.Point(130, 200);
@@ -202,10 +258,10 @@ namespace QuizLab
         }
         public void StartStop()
         {
-            if (IsStarted == false)
+            if (_IsStarted == false)
             {
                 StartStopButton.Text = "Стоп";
-                IsStarted = true;
+                _IsStarted = true;
                 TutorialButton.Dispose();
 
                 StartStopButton.Location = new System.Drawing.Point(680, 60);
@@ -216,7 +272,7 @@ namespace QuizLab
                 StartStopButton.Location = new System.Drawing.Point(130, 200);
                 StartStopButton.Size = new System.Drawing.Size(100, 100);
                 StartStopButton.Text = "Начать тестирование";
-                IsStarted = false; 
+                _IsStarted = false; 
             }
         }
     }
